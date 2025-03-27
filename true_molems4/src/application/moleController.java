@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -21,46 +22,61 @@ import javafx.event.*;
 import java.util.random.*;
 public class moleController implements Initializable {
 
-    @FXML
-    private GridPane array;
+	  @FXML
+	    private Text Score;
 
-    @FXML
-    private Button testmole;
-    @FXML
-    private Text Score;
+	    @FXML
+	    private Text Timer;
 
-    @FXML
-    private Text Timer;
+	    @FXML
+	    private GridPane array;
 
-//    @FXML
-//    private Button tile1;
-//
-//    @FXML
-//    private Button tile2;
-//
-//    @FXML
-//    private Button tile3;
-//
-//    @FXML
-//    private Button tile4;
-//
-//    @FXML
-//    private Button tile5;
-//
-//    @FXML
-//    private Button tile6;
-//
-//    @FXML
-//    private Button tile7;
-//
-//    @FXML
-//    private Button tile8;
-//
-//    @FXML
-//    private Button tile9;
+	    @FXML
+	    private Button testmole;
+
+	    @FXML
+	    private ImageView tile1;
+
+	    @FXML
+	    private ImageView tile2;
+
+	    @FXML
+	    private ImageView tile3;
+
+	    @FXML
+	    private ImageView tile4;
+
+	    @FXML
+	    private ImageView tile5;
+
+	    @FXML
+	    private ImageView tile6;
+
+	    @FXML
+	    private ImageView tile7;
+
+	    @FXML
+	    private ImageView tile8;
+
+	    @FXML
+	    private ImageView tile9;
+
+	    @FXML
+	    void isseen(MouseEvent event) {
+	    	score = score + 100;
+	    }
+
+	    @FXML
+	    void isup(ActionEvent event) {
+	    	isup();
+	    }
+
+    
+   
     
     public static int time = 15;//time
-    public int score;
+    public int score = 0;
+    
 
     //methods
 //    private void changemole(Button tile, ImageView img)
@@ -74,31 +90,38 @@ public class moleController implements Initializable {
 //		setVisibility(false);
 //	}
     
-    public void isseen()
-    {
-    	if (mole.getVisibility()==true )//and is clicked 
-    	{
-    		score += mole.getpoints();
-    		mole.setVisibility(false);
-    	}
-    }
     
-    public void gridpane(GridPane arrays)
-    {
-    	int delay_milli = 500;
-    	for (int i = 0;i<10;i++)
-    	{
-    	arrays.setRowIndex(testmole ,(int)Math.random()*2);
-    	arrays.setColumnIndex(testmole ,(int)Math.random()*2);
-    	
-    	try {
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	}
-    }
+//    @FXML
+//    void isseen(MouseEvent event) {
+//    		System.out.print("10");
+////    		mole.setVisibility(false);
+//    }
+    
+//    public void isseen()
+//    {
+//    	if (mole.getVisibility()==true )//and is clicked 
+//    	{
+//    		System.out.print("10");
+//    		mole.setVisibility(false);
+//    	}
+//    }
+    
+//    public void gridpane(GridPane arrays)
+//    {
+//    	int delay_milli = 500;
+//    	for (int i = 0;i<10;i++)
+//    	{
+//    	arrays.setRowIndex(testmole ,(int)Math.random()*2);
+//    	arrays.setColumnIndex(testmole ,(int)Math.random()*2);
+//    	
+//    	try {
+//			Thread.sleep(300);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//    	}
+//    }
     
     
     
@@ -108,9 +131,10 @@ public class moleController implements Initializable {
     	
     	mole.setVisibility(true);
     	FadeTransition fadeT = new FadeTransition(Duration.millis(1234), testmole);
+//    	isseen();
 		fadeT.setFromValue(0);
 		fadeT.setToValue(.9);
-		fadeT.setCycleCount(1000);
+		fadeT.setCycleCount(4);
 		fadeT.setAutoReverse(true);
 		fadeT.play();
     	//fade transition then set visibility to false
@@ -132,13 +156,13 @@ public class moleController implements Initializable {
     	//stops all animations and set all objects invisible 
     }
     
-    Mole mole = new Mole(100,300,265,false);
+    Mole mole = new Mole(100,300,265,true);
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	//initializes something at the start of the program
     	
     	//below implements a count down timer of i.
-    	gridpane(array);
+//    	gridpane(array); does not work as intended 
     	Score.setText(String.valueOf(score));
     	Timer.setText(String.valueOf(time));
     	Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000),e->{
@@ -157,7 +181,6 @@ public class moleController implements Initializable {
     	//import image
     	timeline.setCycleCount(time+1); //make it indefinite but end when game ends
     	timeline.play();	
-    	isup();
     	
     }
 }
