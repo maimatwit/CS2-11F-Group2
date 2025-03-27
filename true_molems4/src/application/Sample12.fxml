@@ -78,7 +78,8 @@
                   </ImageView>
                </children>
             </GridPane>
-            <Button fx:id="testmole" layoutX="62.0" layoutY="251.0" mnemonicParsing="false" onAction="#isseen" onMouseClicked="#isseen" prefHeight="52.0" prefWidth="83.0" text="Button" />
+            <Button fx:id="testmole" layoutX="60.0" layoutY="250.0" mnemonicParsing="false" onAction="#isup" onMouseClicked="#isseen" prefHeight="52.0" prefWidth="83.0" text="Button" />
+            <Button layoutX="67.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#increasetimeby1" text="Button" />
          </children>
       </AnchorPane>
    </left>

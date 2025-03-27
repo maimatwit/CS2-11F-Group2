@@ -62,10 +62,10 @@ public class Mole {
 //	}
 	
 	
-	public void addpoint()
-	{
-		score += getpoints();
-	}
+//	public void addpoint()
+//	{
+//		score += getpoints();
+//	}
 	
 	//is_hitmethod with picture
 	
