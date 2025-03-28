@@ -28,54 +28,11 @@ public class methods {
 	    @FXML
 	    private Text timer;
 
-  //following is for mole class
-  int point =100;
-  int duration = 3000;//ms
-  int frequency = 2000;//ms
-  boolean is_active = true;
-  //
-  private int score =0;
-  private int timecountdown = 30;
-  @FXML 
-  public void initialize()
-  {
-  displaypoint.setText(String.valueOf(score));
-  }
-  @FXML
-  void add(MouseEvent event) {
-  	add();
-  }
-  public void add() {  	
-  	score +=10;
-  	displaypoint.setText(String.valueOf(score));
-  	button.setDisable(true);
-  }
   
-//methods
-  public void animation()//combines adding points on click with fading animation
-	{
-  	int randomvar = 3;// will probably set it to games start time 
-  	while (randomvar >0)
-  	{
-  	FadeTransition fadeT = new FadeTransition(Duration.millis(5000), button);//how long it take sto disappear 
-		fadeT.setFromValue(1);
-		fadeT.setToValue(0);
-		fadeT.setCycleCount(1000);// how many times it does it will bind it to the intial time #note no need to reverse because we want it to pop and disappear 
-		button.setDisable(false);//unlocks interaction with button before might need a delay to gvie it time to move 
-		fadeT.play();
-//		button.setOnMouseClicked(mouseEvent ->{  //issue with animation and mouse event 
-//			add();
-//		});
-		randomvar--;
-  	}
-	}
 	_____________________________________________________
 	Following covers moving to set locations
 	
 	  @FXML
-	    private Circle circ;
-
-	    @FXML
 	    private Circle circ1;
 
 	    @FXML
@@ -100,10 +57,13 @@ public class methods {
 	    private Circle circ8;
 
 	    @FXML
-	    private Button tile9;
+	    private Circle circ9;
+
+	    @FXML
+	    private Button tile1;
 	    
 	    @FXML
-	    private Rectangle mole;
+	    private Rectangle moleshape;
 	    int x = 281;
 	    int y = 120;
 	    
