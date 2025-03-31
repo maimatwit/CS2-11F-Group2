@@ -1,156 +1,164 @@
 package application;
-import javafx.fxml.Initializable;
-
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import javafx.event.*;
-import java.util.random.*;
-public class moleController //implements Initializable 
-{
-	
-	 @FXML
-	    private Circle circ1;
+
+
+public class moleController implements Initializable{
+	@FXML
+    private Text gameover;
+	  @FXML
+	    private Button start;
+	  @FXML
+	    private Text scoretext;
+
+	   @FXML
+	   private Text timetext;
+	   @FXML
+	    private Button tile1;
 
 	    @FXML
-	    private Circle circ2;
+	    private Button tile2;
 
 	    @FXML
-	    private Circle circ3;
+	    private Button tile3;
 
 	    @FXML
-	    private Circle circ4;
+	    private Button tile4;
 
 	    @FXML
-	    private Circle circ5;
+	    private Button tile5;
 
 	    @FXML
-	    private Circle circ6;
+	    private Button tile6;
 
 	    @FXML
-	    private Circle circ7;
+	    private Button tile7;
 
 	    @FXML
-	    private Circle circ8;
+	    private Button tile8;
 
 	    @FXML
-	    private Circle circ9;
-
+	    private Button tile9;
+	    
+	    
 	    @FXML
-	    private Text dpoint;
+	    void begingame(ActionEvent event) {
+	    	start.setDisable(true);
+	    	gameover.setOpacity(0);
+	    	time = starttime;
+	    	tiles = new ArrayList<>(Arrays.asList(tile1,tile2,tile3,tile4,tile5,tile6,tile7,tile8,tile9));
+	    	tiles.forEach(tile->{
+	    		tile.setDisable(false);
+	    		tile.setOpacity(1);
+					});
+			Timeline timeline =  new Timeline(new  KeyFrame(Duration.seconds(1), e->{
+			if (time>=0) {
+				
+					timetext.setText("Time Left: " + time);	
+				tiles.forEach(tile->{
+			choice = (int)(Math.random()*5)+1;
+					setupButton(tile);
+				});
+				time--;
+			}
+			else {resetgame();}
+			}));
+			timeline.setCycleCount(time+1);
+			timeline.play();
+	    	
+	    }
+	    
+	    
+	    
+	    
+	int starttime =45;
+    int time;
+    int score =0;
+    double randomspawn;
+    public int choice;
+    
+    ArrayList<Button> tiles;
+    //methods
+    
+   
+    
 
-	    @FXML
-	    private Rectangle molemove;
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		time = starttime;
+		  timetext.setText("Time Left: " + time);
+		  scoretext.setText("Score: " + score);
 
-	    @FXML
-	    private Button molesub;
-
-	    @FXML
-	    private Text timer;
-
-
-	    /**
-* //following is for mole class
-  int point =100;
-  int duration = 3000;//ms
-  int frequency = 2000;//ms
-  boolean is_active = true;
-  //
-  private int score =0;
-  private int timecountdown = 30;
-  @FXML 
-  public void initialize()
-  {
-  displaypoint.setText(String.valueOf(score));
-  }
-  @FXML
-  void add(MouseEvent event) {
-  	add();
-  }
-  public void add() {  	
-  	score +=10;
-  	dpoint.setText(String.valueOf(score));
-  	molesub.setDisable(true);
-  }
-  
-//methods
-  public void animation()//combines adding points on click with fading animation
-	{
-  	int randomvar = 3;// will probably set it to games start time 
-  	while (randomvar >0)
-  	{
-  	FadeTransition fadeT = new FadeTransition(Duration.millis(5000), button);//how long it takes to disappear 
-		fadeT.setFromValue(1);
-		fadeT.setToValue(0);
-		fadeT.setCycleCount(1000);// how many times it does it will bind it to the initial time #note no need to reverse because we want it to pop and disappear 
-		button.setDisable(false);//unlocks interaction with button before might need a delay to give it time to move 
-		fadeT.play();
-//		button.setOnMouseClicked(mouseEvent ->{  //issue with animation and mouse event 
-//			add();
-//		});
-		randomvar--;
-  	}
+		  tiles = new ArrayList<>(Arrays.asList(tile1,tile2,tile3,tile4,tile5,tile6,tile7,tile8,tile9));
+		
+		
+		
 	}
 	
-	    int x = molemove.getX();
-	    int y = molemove.getY();
-	    
-	    ArrayList<Circle> hole = new ArrayList<Circle>(Arrays.asList(circ1,circ2,circ3,circ4,circ5,circ6,circ7,circ8,circ9));
-	    
-	    public void movetoHole()//DOES NOT WORK INTENDED
+	
+	void setupButton(Button tile)
+	{
+    	if (choice == 1 )
+    	{
+    		
+    		tile.setTextFill(Color.BROWN);
+    		tile.setOnMouseClicked(mouseEvent ->{
+    			if(mouseEvent.getClickCount()<2)//makes sure to only click once on mole
+    			{
+    		score++;
+    		scoretext.setText("Score: " + score);
+    			}
+    		});
+    	}
+    	else if (choice ==2)
+    	{
+    		tile.setTextFill(Color.RED);
+    		tile.setOnMouseClicked(mouseEvent ->{
+        		resetgame();
+        		});
+    	}
+    	else 
+    	{
+    		tile.setTextFill(Color.BLACK);
+    		tile.setOnMouseClicked(mouseEvent ->{
+        		});
+    	}
+	}
+	
+	
+	
+	 private void resetgame()
 	    {
+		 time = 0;
+		 tiles.forEach(tile->{
+				tile.setDisable(true);
+				tile.setOpacity(0);
+		 });
+		 gameover.setOpacity(1);
+		 start.setDisable(false);
 	    	
-	    	
-	    	for (Circle i: hole)
-	    	{
-	    	moveCircleX(returnx(i));
-	    	moveCircleY(returny(i));
-	    	}
 	    }
-	    
-	    public double returnx(Circle burrow)//something about burrow being null
-	    {
-	    	return  burrow.getCenterX();
-	    }
-	    public double returny(Circle burrow)
-	    {
-	    	return  burrow.getCenterY();
-	    }
-	    
-	    
-	    
-	    public void moveToY(double positionChangeY)//changes position to y
-	    {
-	    	molemove.setY(positionChangeY);
-	    	
-	    }
-	    public void moveToX(double positionChangeX)//changes position to x 
-	    {
-	    	molemove.setX(positionChangeX);
-	    }
-
-	     * 
-	     */
-//    @Override
-//	public void initialize(URL arg0, ResourceBundle arg1) {
-//   
-//    }
- 
+	
+	
 }
-
