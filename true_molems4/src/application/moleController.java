@@ -63,16 +63,20 @@ public class moleController implements Initializable{
 	    
 	    @FXML
 	    void begingame(ActionEvent event) {
+	    	score = 0;
+	    	time = starttime;
+			timetext.setText("Time Left: " + time);
+			scoretext.setText("Score: " + score);
 	    	start.setDisable(true);
 	    	gameover.setOpacity(0);
-	    	time = starttime;
+	    	
 	    	tiles = new ArrayList<>(Arrays.asList(tile1,tile2,tile3,tile4,tile5,tile6,tile7,tile8,tile9));
 	    	tiles.forEach(tile->{
 	    		tile.setDisable(false);
 	    		tile.setOpacity(1);
 					});
 			Timeline timeline =  new Timeline(new  KeyFrame(Duration.seconds(1), e->{
-			if (time>=0) {
+			if (time>0) {
 				
 					timetext.setText("Time Left: " + time);	
 				tiles.forEach(tile->{
@@ -81,20 +85,21 @@ public class moleController implements Initializable{
 				});
 				time--;
 			}
-			else {resetgame();}
+			else {
+				resetgame();
+				}
 			}));
 			timeline.setCycleCount(time+1);
 			timeline.play();
-	    	
 	    }
 	    
 	    
 	    
 	    
-	int starttime =45;
-    int time;
-    int score =0;
-    double randomspawn;
+	public int starttime=5;
+    public int time=starttime;
+    public int score =0;
+    public double randomspawn;
     public int choice;
     
     ArrayList<Button> tiles;
@@ -107,8 +112,8 @@ public class moleController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		time = starttime;
-		  timetext.setText("Time Left: " + time);
-		  scoretext.setText("Score: " + score);
+		timetext.setText("Time Left: " + time);
+		scoretext.setText("Score: " + score);
 
 		  tiles = new ArrayList<>(Arrays.asList(tile1,tile2,tile3,tile4,tile5,tile6,tile7,tile8,tile9));
 		
@@ -126,7 +131,7 @@ public class moleController implements Initializable{
     		tile.setOnMouseClicked(mouseEvent ->{
     			if(mouseEvent.getClickCount()<2)//makes sure to only click once on mole
     			{
-    		score++;
+    		score+=200;
     		scoretext.setText("Score: " + score);
     			}
     		});
@@ -135,8 +140,12 @@ public class moleController implements Initializable{
     	{
     		tile.setTextFill(Color.RED);
     		tile.setOnMouseClicked(mouseEvent ->{
-        		resetgame();
-        		});
+    			if(mouseEvent.getClickCount()<2)//makes sure to only click once on mole
+    			{
+    		score-=100;
+    		scoretext.setText("Score: " + score);
+    			}
+    		});
     	}
     	else 
     	{
