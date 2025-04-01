@@ -80,7 +80,7 @@ public class moleController implements Initializable{
 				
 					timetext.setText("Time Left: " + time);	
 				tiles.forEach(tile->{
-			choice = (int)(Math.random()*5)+1;
+			choice = (int)(Math.random()*100)+1;
 					setupButton(tile);
 				});
 				time--;
@@ -96,11 +96,13 @@ public class moleController implements Initializable{
 	    
 	    
 	    
-	public int starttime=5;
+	public int starttime=45;
     public int time=starttime;
     public int score =0;
     public double randomspawn;
     public int choice;
+    public int molespawn =30;
+    public int bombspawn = 30;
     
     ArrayList<Button> tiles;
     //methods
@@ -124,10 +126,10 @@ public class moleController implements Initializable{
 	
 	void setupButton(Button tile)
 	{
-    	if (choice == 1 )
+    	if (choice < molespawn || choice == molespawn )
     	{
-    		
-    		tile.setTextFill(Color.BROWN);
+    		tile.setStyle("-fx-base: maroon");
+    		tile.setText("MOLE");
     		tile.setOnMouseClicked(mouseEvent ->{
     			if(mouseEvent.getClickCount()<2)//makes sure to only click once on mole
     			{
@@ -136,9 +138,10 @@ public class moleController implements Initializable{
     			}
     		});
     	}
-    	else if (choice ==2)
+    	else if (choice < molespawn + bombspawn || choice == molespawn+bombspawn)
     	{
-    		tile.setTextFill(Color.RED);
+    		tile.setStyle("-fx-base: red");
+    		tile.setText("BOMB");
     		tile.setOnMouseClicked(mouseEvent ->{
     			if(mouseEvent.getClickCount()<2)//makes sure to only click once on mole
     			{
@@ -149,6 +152,8 @@ public class moleController implements Initializable{
     	}
     	else 
     	{
+    		tile.setText(" ");
+    		tile.setStyle("-fx-base: lawngreen");
     		tile.setTextFill(Color.BLACK);
     		tile.setOnMouseClicked(mouseEvent ->{
         		});
