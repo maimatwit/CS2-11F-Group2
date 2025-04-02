@@ -88,9 +88,7 @@ public class moleController implements Initializable{
 	    	 starttime=30;
 		     time = starttime;	
 		     animal.difficulty_change(2);
-		     bomb.setend_game(1);
 		     bomb.difficulty_change(2);
-		     bomb.setend_game(1);
 		     
 	    }
 
@@ -140,13 +138,11 @@ public class moleController implements Initializable{
 	public static int starttime=45;
     public int time=starttime;
     public int score =0;
-    public double randomspawn;
-    public int choice;
-    public int molespawn =30;
-    public int bombspawn = 30;
+   
+    private int choice;
     
-    Props animal = new Mole(100,30);
-    Props bomb = new Bomb(100,20,0);
+    Mole animal = new Mole(100,30);
+    Bomb bomb = new Bomb(100,20,false);
     ArrayList<Button> tiles;
     //methods
     
@@ -169,7 +165,7 @@ public class moleController implements Initializable{
 	
 	void setupButton(Button tile)
 	{
-    	if (choice < molespawn || choice == molespawn )
+    	if (choice < animal.getspawnchance() || choice == animal.getspawnchance() )
     	{
     		tile.setStyle("-fx-base: maroon");
     		tile.setText("MOLE");
@@ -181,14 +177,14 @@ public class moleController implements Initializable{
     			}
     		});
     	}
-    	else if (choice < molespawn + bombspawn || choice == molespawn+bombspawn)
+    	else if (choice < animal.getspawnchance() + bomb.getspawnchance() || choice == animal.getspawnchance()+bomb.getspawnchance())
     	{
     		tile.setStyle("-fx-base: red");
     		tile.setText("BOMB");
     		tile.setOnMouseClicked(mouseEvent ->{
     			if(mouseEvent.getClickCount()<2)//makes sure to only click once on mole
     			{
-    				if(bomb.getend_game() == 1)
+    				if( bomb.getend_game())
     				{
     					resetgame();
     				}
@@ -216,6 +212,7 @@ public class moleController implements Initializable{
 	 public void resetgame()
 	    {
 		 time = 0;
+		 timetext.setText("Time Left: " + time);
 		 tiles.forEach(tile->{
 				tile.setDisable(true);
 				tile.setOpacity(0);

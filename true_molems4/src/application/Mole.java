@@ -7,12 +7,16 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Button;
 import javafx.util.Duration;
 
-public class Mole extends Props{
+public class Mole {
+	private int points;
+	private int spawnchance;
+
 	public Mole(int points, int spawnchance ) {
-		super(points, spawnchance);
+		this.points = points;
+		this.spawnchance = spawnchance;
+		
 	}
 
-	@Override
 	public void difficulty_change(int n) {
 		if (n ==0)
 		{
@@ -32,19 +36,20 @@ public class Mole extends Props{
 		
 	}
 
+	public int getpoints()
+	{return points;}
+	public void setpoints(int points)
+	{this.points=points;}
+	
+	
+	public void setspawnchance(int spawnchance)
+	{this.spawnchance=spawnchance;}
+	
+	public int getspawnchance()
+	{return spawnchance;}
+
 	
 
-	@Override
-	void setend_game(int setting) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	int getend_game() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	
   

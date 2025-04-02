@@ -24,7 +24,5 @@ abstract class Props {
 	
 	abstract void difficulty_change(int num);
 
-	abstract int getend_game();
-	abstract void setend_game(int setting);
 
 }
