@@ -4,48 +4,51 @@ import java.util.Random;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.control.Button;
 import javafx.util.Duration;
 
-public class Mole {
-	private int points;
-	private int timespawn;//ms
-	private int duration;//ms
-	private Timeline totaltime;
-	private boolean Visibility = false;
+public class Mole extends Props{
+	public Mole(int points, int spawnchance ) {
+		super(points, spawnchance);
+	}
 
-//	int starttime = 15;
-	private int score;
+	@Override
+	public void difficulty_change(int n) {
+		if (n ==0)
+		{
+			setpoints(points*3);
+			setspawnchance(spawnchance*2);
+		}
+		else if (n ==1)
+		{
+			setpoints(points*2);
+			setspawnchance(spawnchance);			
+		}
+		else
+		{
+			setpoints(points);
+			setspawnchance(spawnchance);
+		}
+		
+	}
+
+	
+
+	@Override
+	void setend_game(int setting) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	int getend_game() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
   
-	Mole(int points,int timespawn,int duration,boolean Visibility){
-		this.points = points;
-		this.timespawn = timespawn;
-		this.duration = duration;
-		this.Visibility = Visibility;
-//		totaltime = new Timeline(new KeyFrame(Duration.millis(1000)));
-	}
-	//__________________________________________________________________________________________________________________________________________________________
-	public int getpoints()
-	{return points;}
-	public void setpoints(int points)
-	{this.points=points;}
 	
-	public int gettimespawn()
-	{return timespawn;}
-	public void settimespawn(int timespawn)
-	{this.timespawn= timespawn;}
-	
-	
-	public int getduration()
-	{return duration;}
-	public void setduration(int duration)
-	{this.duration= duration;}
-	
-	public boolean getVisibility()
-	{return Visibility;}
-	public void setVisibility(boolean Visibility )
-	{this.Visibility= Visibility;}
-	//________________________________________________________________________________________________________________________________________________________________
 	
 //	public boolean is_Up()//displays mole for duration
 //	{

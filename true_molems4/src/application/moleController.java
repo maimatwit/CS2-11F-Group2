@@ -16,6 +16,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -25,7 +27,20 @@ import javafx.util.Duration;
 
 public class moleController implements Initializable{
 	@FXML
-    private Text gameover;
+    private RadioButton difficulty1;
+
+    @FXML
+    private RadioButton difficulty2;
+
+    @FXML
+    private RadioButton difficulty3;
+    
+    
+    @FXML
+    private ToggleGroup difficulty;
+    
+	  @FXML
+	  private Text gameover;
 	  @FXML
 	    private Button start;
 	  @FXML
@@ -59,6 +74,34 @@ public class moleController implements Initializable{
 
 	    @FXML
 	    private Button tile9;
+	    
+	    @FXML
+	    void easy(ActionEvent event) {
+	    	 starttime=60;
+		     time = starttime;
+		     animal.difficulty_change(0);
+		     bomb.difficulty_change(0);
+	    }
+
+	    @FXML
+	    void hard(ActionEvent event) {
+	    	 starttime=30;
+		     time = starttime;	
+		     animal.difficulty_change(2);
+		     bomb.setend_game(1);
+		     bomb.difficulty_change(2);
+		     bomb.setend_game(1);
+		     
+	    }
+
+	    @FXML
+	    void medium(ActionEvent event) {
+	    	 starttime=45;
+		     time = starttime;
+		     animal.difficulty_change(1);
+		     bomb.difficulty_change(1);
+	    }
+	    
 	    
 	    
 	    @FXML
@@ -94,9 +137,7 @@ public class moleController implements Initializable{
 	    }
 	    
 	    
-	    
-	    
-	public int starttime=45;
+	public static int starttime=45;
     public int time=starttime;
     public int score =0;
     public double randomspawn;
@@ -104,6 +145,8 @@ public class moleController implements Initializable{
     public int molespawn =30;
     public int bombspawn = 30;
     
+    Props animal = new Mole(100,30);
+    Props bomb = new Bomb(100,20,0);
     ArrayList<Button> tiles;
     //methods
     
@@ -133,7 +176,7 @@ public class moleController implements Initializable{
     		tile.setOnMouseClicked(mouseEvent ->{
     			if(mouseEvent.getClickCount()<2)//makes sure to only click once on mole
     			{
-    		score+=200;
+    		score+=animal.getpoints();
     		scoretext.setText("Score: " + score);
     			}
     		});
@@ -145,8 +188,16 @@ public class moleController implements Initializable{
     		tile.setOnMouseClicked(mouseEvent ->{
     			if(mouseEvent.getClickCount()<2)//makes sure to only click once on mole
     			{
-    		score-=100;
-    		scoretext.setText("Score: " + score);
+    				if(bomb.getend_game() == 1)
+    				{
+    					resetgame();
+    				}
+    				else
+    				{
+    					
+    					score-=bomb.getpoints();
+    		    		scoretext.setText("Score: " + score);
+    				}
     			}
     		});
     	}
@@ -162,7 +213,7 @@ public class moleController implements Initializable{
 	
 	
 	
-	 private void resetgame()
+	 public void resetgame()
 	    {
 		 time = 0;
 		 tiles.forEach(tile->{
