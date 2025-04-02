@@ -35,10 +35,6 @@ public class moleController implements Initializable{
     @FXML
     private RadioButton difficulty3;
     
-    
-    @FXML
-    private ToggleGroup difficulty;
-    
 	  @FXML
 	  private Text gameover;
 	  @FXML
@@ -76,13 +72,23 @@ public class moleController implements Initializable{
 	    private Button tile9;
 	    
 	    @FXML
+	    private ToggleGroup difficulty;
+	    
+	    @FXML
 	    void easy(ActionEvent event) {
 	    	 starttime=60;
 		     time = starttime;
 		     animal.difficulty_change(0);
 		     bomb.difficulty_change(0);
 	    }
-
+	    @FXML
+	    void normal(ActionEvent event) {
+	    	 starttime=45;
+		     time = starttime;
+		     animal.difficulty_change(1);
+		     bomb.difficulty_change(1);
+	    }
+	    
 	    @FXML
 	    void hard(ActionEvent event) {
 	    	 starttime=30;
@@ -90,14 +96,6 @@ public class moleController implements Initializable{
 		     animal.difficulty_change(2);
 		     bomb.difficulty_change(2);
 		     
-	    }
-
-	    @FXML
-	    void medium(ActionEvent event) {
-	    	 starttime=45;
-		     time = starttime;
-		     animal.difficulty_change(1);
-		     bomb.difficulty_change(1);
 	    }
 	    
 	    

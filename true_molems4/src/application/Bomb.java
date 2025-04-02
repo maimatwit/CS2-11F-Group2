@@ -1,9 +1,5 @@
 package application;
 
-import java.util.ArrayList;
-
-import javafx.scene.control.Button;
-
 class Bomb extends Mole {
 	boolean end_game;
 	public Bomb(int points, int spawnchance, boolean end_game) {

@@ -1,12 +1,5 @@
 package application;
 
-import java.util.Random;
-
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.scene.control.Button;
-import javafx.util.Duration;
-
 public class Mole {
 	private int points;
 	private int spawnchance;
