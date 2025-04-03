@@ -145,7 +145,6 @@ public class moleController implements Initializable{
 	public static int starttime=45;
     public int time=starttime;
     public int score =0;
-    private int pointsgain = 100;
     
     private int choice;
     

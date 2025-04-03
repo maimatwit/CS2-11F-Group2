@@ -43,9 +43,6 @@ public class Mole {
 	public int getspawnchance()
 	{return spawnchance;}
 	
-	
-	
-	
 	public void revertall()
 	{
 		revertpoint();
