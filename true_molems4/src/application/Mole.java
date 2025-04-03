@@ -3,13 +3,15 @@ package application;
 public class Mole {
 	private int points;
 	private int spawnchance;
+	private int original_point;
+	private int original_spawnchance;
 
 	public Mole(int points, int spawnchance ) {
 		this.points = points;
 		this.spawnchance = spawnchance;
-		
+		this.original_point=points;
+		this.original_spawnchance=spawnchance;
 	}
-
 	public void difficulty_change(int n) {
 		if (n ==0)
 		{
@@ -24,7 +26,7 @@ public class Mole {
 		else
 		{
 			setpoints(points);
-			setspawnchance(spawnchance);
+			setspawnchance(spawnchance/2);
 		}
 		
 	}
@@ -40,6 +42,23 @@ public class Mole {
 	
 	public int getspawnchance()
 	{return spawnchance;}
+	
+	
+	
+	
+	public void revertall()
+	{
+		revertpoint();
+		revertpawnchance();
+	}
+	public void revertpoint()
+	{
+		this.points=this.original_point;
+	}
+	public void revertpawnchance()
+	{
+		this.spawnchance=this.original_spawnchance;
+	}
 
 	
 

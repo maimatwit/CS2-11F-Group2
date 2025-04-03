@@ -12,8 +12,18 @@ class Bomb extends Mole {
 	public void setend_game(boolean setting)
 	{this.end_game=setting;}
 	
-	
-	
+//	public int getpoints()
+//	{return points;}
+//	public void setpoints(int points)
+//	{this.points=points;}
+//	
+//	
+//	public void setspawnchance(int spawnchance)
+//	{this.spawnchance=spawnchance;}
+//	
+//	public int getspawnchance()
+//	{return spawnchance;}
+//	
 	 @Override
 		public void difficulty_change(int n) {
 			if (n ==0)

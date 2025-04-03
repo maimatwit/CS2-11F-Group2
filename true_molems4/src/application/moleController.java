@@ -76,26 +76,35 @@ public class moleController implements Initializable{
 	    
 	    @FXML
 	    void easy(ActionEvent event) {
-	    	 starttime=60;
+	    	animal.revertall();
+	    	bomb.revertall();
+	    	 starttime=5;
 		     time = starttime;
+		     timetext.setText("Time Left: " + time);
 		     animal.difficulty_change(0);
 		     bomb.difficulty_change(0);
 	    }
 	    @FXML
 	    void normal(ActionEvent event) {
-	    	 starttime=45;
+	    	animal.revertall();
+	    	bomb.revertall();
+	    	 starttime=10;
 		     time = starttime;
+		     timetext.setText("Time Left: " + time);
 		     animal.difficulty_change(1);
 		     bomb.difficulty_change(1);
+		     
 	    }
 	    
 	    @FXML
 	    void hard(ActionEvent event) {
-	    	 starttime=30;
+	    	animal.revertall();
+	    	bomb.revertall();
+	    	 starttime=15;
 		     time = starttime;	
+		     timetext.setText("Time Left: " + time);
 		     animal.difficulty_change(2);
 		     bomb.difficulty_change(2);
-		     
 	    }
 	    
 	    
@@ -136,7 +145,8 @@ public class moleController implements Initializable{
 	public static int starttime=45;
     public int time=starttime;
     public int score =0;
-   
+    private int pointsgain = 100;
+    
     private int choice;
     
     Mole animal = new Mole(100,30);
@@ -217,7 +227,6 @@ public class moleController implements Initializable{
 		 });
 		 gameover.setOpacity(1);
 		 start.setDisable(false);
-	    	
 	    }
 	
 	
