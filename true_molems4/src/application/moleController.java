@@ -4,38 +4,23 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-import javafx.animation.AnimationTimer;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 
 public class moleController implements Initializable{
-	@FXML
-    private RadioButton difficulty1;
-
-    @FXML
-    private RadioButton difficulty2;
-
-    @FXML
-    private RadioButton difficulty3;
-    
-	  @FXML
+      @FXML
 	  private Text gameover;
 	  @FXML
 	    private Button start;
@@ -72,13 +57,22 @@ public class moleController implements Initializable{
 	    private Button tile9;
 	    
 	    @FXML
+	    private RadioButton difficulty1;
+
+	    @FXML
+	    private RadioButton difficulty2;
+
+	    @FXML
+	    private RadioButton difficulty3;
+	    
+	    @FXML
 	    private ToggleGroup difficulty;
 	    
 	    @FXML
 	    void easy(ActionEvent event) {
 	    	animal.revertall();
 	    	bomb.revertall();
-	    	 starttime=5;
+	    	 starttime=60;
 		     time = starttime;
 		     timetext.setText("Time Left: " + time);
 		     animal.difficulty_change(0);
@@ -88,7 +82,7 @@ public class moleController implements Initializable{
 	    void normal(ActionEvent event) {
 	    	animal.revertall();
 	    	bomb.revertall();
-	    	 starttime=10;
+	    	 starttime=45;
 		     time = starttime;
 		     timetext.setText("Time Left: " + time);
 		     animal.difficulty_change(1);
@@ -100,7 +94,7 @@ public class moleController implements Initializable{
 	    void hard(ActionEvent event) {
 	    	animal.revertall();
 	    	bomb.revertall();
-	    	 starttime=15;
+	    	 starttime=30;
 		     time = starttime;	
 		     timetext.setText("Time Left: " + time);
 		     animal.difficulty_change(2);

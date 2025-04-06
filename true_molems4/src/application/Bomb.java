@@ -33,6 +33,13 @@ class Bomb extends Mole {
 				setspawnchance(getspawnchance()*2);
 			}
 	 }
+	 @Override
+	 public void revertall()
+		{
+		 setend_game(false);
+			revertpoint();
+			revertpawnchance();
+		}
 
 //		public int getpoints()
 //		{return points;}
